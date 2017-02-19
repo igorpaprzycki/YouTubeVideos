@@ -9,23 +9,18 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.igypap.youtubevideos.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class YoutubeActivity extends YouTubeBaseActivity
         implements YouTubePlayer.OnInitializedListener {
 
-    @BindView(R.id.youtube_player)
-    YouTubePlayerView youTubePlayerView;
 
-    private String GOOGLE_API_KEY = "TBA";
-    private String YOUTUBE_VIDEO_ID = "TBA";
+    private String GOOGLE_API_KEY = "AIzaSyBiAP0jLSDvJiSJp03qXlKWgXJWVOiNLyY";
+    private String YOUTUBE_VIDEO_ID = "rnWAPG6wkco";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
-        ButterKnife.bind(this);
+        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
 
         youTubePlayerView.initialize(GOOGLE_API_KEY, this);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -58,12 +53,16 @@ public class YoutubeActivity extends YouTubeBaseActivity
             new YouTubePlayer.PlaybackEventListener() {
         @Override
         public void onPlaying() {
-
+            Toast.makeText(YoutubeActivity.this,
+                    "Video is playing",
+                    Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onPaused() {
-
+            Toast.makeText(YoutubeActivity.this,
+                    "Video paused",
+                    Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -82,7 +81,7 @@ public class YoutubeActivity extends YouTubeBaseActivity
         }
     };
 
-    private YouTubePlayer.PlayerStateChangeListener playerStateChangedListener =
+    YouTubePlayer.PlayerStateChangeListener playerStateChangedListener =
             new YouTubePlayer.PlayerStateChangeListener() {
                 @Override
                 public void onLoading() {
@@ -96,12 +95,16 @@ public class YoutubeActivity extends YouTubeBaseActivity
 
                 @Override
                 public void onAdStarted() {
-
+                    Toast.makeText(YoutubeActivity.this,
+                            "Click Ad now, make the video creator rich",
+                            Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onVideoStarted() {
-
+                    Toast.makeText(YoutubeActivity.this,
+                            "Video started",
+                            Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -118,6 +121,8 @@ public class YoutubeActivity extends YouTubeBaseActivity
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider,
                                         YouTubeInitializationResult youTubeInitializationResult) {
-        Toast.makeText(this, "Failure initializing youtube player", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,
+                "Failure initializing youtube player",
+                Toast.LENGTH_SHORT).show();
     }
 }
